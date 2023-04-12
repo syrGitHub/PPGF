@@ -20,18 +20,6 @@ from confusion_matrix import confusion_matrix
 from regression_error import regression_error
 from Group_helper import Group_helper
 
-'''
-def setup_seed(seed):
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    np.random.seed(seed)
-    random.seed(seed)
-    torch.backends.cudnn.deterministic = True
-
-# 设置随机数种子
-setup_seed(1990)
-'''
-
 
 class Main():
     def __init__(self, args):
@@ -109,23 +97,7 @@ class Main():
         confusion_matrix(f'./result_save/{self.args.save_path_pattern}/result_fushion_gate_test.pkl', cls_label)
 
         self.save_outputs(test_result, test_true_result, self.args)
-        '''
-        paths_predict = f'./result_save/{self.args.save_path_pattern}/1_predict.txt'
-        paths_true = f'./result_save/{self.args.save_path_pattern}/1_true.txt'
-        np.savetxt(paths_predict, test_result)
-        np.savetxt(paths_true, test_true_result)
-        
-        pyplot.plot(val_true_result, color='cyan', label='true', linewidth=1)
-        pyplot.plot(self.val_result, color='magenta', label='predict', linewidth=1)
-        pyplot.legend(loc='upper right', fontsize=10)
-        pyplot.title('24_96_GTA')
-        pyplot.savefig('/home/sunyanru19s/pytorch/GDN-main/pretrained_7_best/24_96_persistence_true_predict.jpg')
-        pyplot.show()
-        # print("main_val_result: ", self.val_result)
-        print(train_rmse, train_mae, train_cc)
-        print(val_rmse, val_mae, val_cc)
-        '''
-        # print("Test Prediction Result:", test_rmse.item(), test_mae.item(), test_cc.item(), test_mape.item(), test_msle.item())
+
         return test_rmse, test_mae, test_cc, test_mape, test_msle, acc
 
     def build_group(self, dataset_train, args, scale_y):
@@ -226,14 +198,3 @@ if __name__ == '__main__':
             test_cc.append(test_cc_1)
             test_mape.append(test_mape_1)
             test_msle.append(test_msle_1)
-        '''
-        print(train_rmse, train_mae, train_cc, train_mape, train_msle, val_rmse, val_mae, val_cc, val_mape, val_msle, 
-              test_rmse, test_mae, test_cc, test_mape, test_msle)
-        print(np.mean(train_rmse), np.std(train_rmse, ddof=1), np.mean(train_mae), np.std(train_mae, ddof=1),
-              np.mean(train_cc), np.std(train_cc, ddof=1), np.mean(train_mape), np.std(train_mape, ddof=1),
-              np.mean(val_rmse), np.std(val_rmse, ddof=1), np.mean(val_mae), np.std(val_mae, ddof=1),
-              np.mean(val_cc), np.std(val_cc, ddof=1), np.mean(val_mape), np.std(val_mape, ddof=1),
-              np.mean(test_rmse), np.std(test_rmse, ddof=1), np.mean(test_mae), np.std(test_mae, ddof=1),
-              np.mean(test_cc), np.std(test_cc, ddof=1), np.mean(test_mape), np.std(test_mape, ddof=1))
-        print(np.min(test_rmse))
-        '''
