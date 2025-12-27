@@ -1,0 +1,4 @@
+date_time
+temp
+clouds_all
+traffic_volume
